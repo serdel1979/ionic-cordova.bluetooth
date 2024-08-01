@@ -249,34 +249,7 @@ onButtonRelease() {
   }
 
 
-/*
 
-  handleMove(event: TouchEvent) {
-    const touch = event.touches[0];
-    const x = touch.clientX;
-    const y = touch.clientY;
-
-    console.log('Touch move detected', x, y);
-
-
-
-    if (this.button8 && this.isInsideButton(this.button8, x, y)) {
-      this.directionLabel = 'up';
-      this.sendData('8');
-    } else if (this.button4 && this.isInsideButton(this.button4, x, y)) {
-      this.directionLabel = 'left';
-      this.sendData('4');
-    } else if (this.button6 && this.isInsideButton(this.button6, x, y)) {
-      this.directionLabel = 'right';
-      this.sendData('6');
-    } else if (this.button2 && this.isInsideButton(this.button2, x, y)) {
-      this.directionLabel = 'down';
-      this.sendData('2');
-    } else {
-      this.directionLabel = 'Desliza para ver dirección';
-    }
-  }
-*/
 
 
 
