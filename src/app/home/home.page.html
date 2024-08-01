@@ -9,12 +9,44 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Control</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-content (touchmove)="handleMove($event)">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button style="height: 150px;" class="custom-height" expand="block" (click)="sendData('8')" (touchstart)="sendData('8')" id="button-8">
+            <ion-icon name="arrow-up"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button style="height: 150px;" class="custom-height" expand="block" (click)="sendData('4')" (touchstart)="sendData('4')" id="button-4">
+            <ion-icon name="arrow-back"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button style="height: 150px;" class="custom-height" expand="block" (click)="sendData('6')" (touchstart)="sendData('6')" id="button-6">
+            <ion-icon name="arrow-forward"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button style="height: 150px;" class="custom-height" expand="block" (click)="sendData('2')" (touchstart)="sendData('2')" id="button-2">
+            <ion-icon name="arrow-down"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label id="direction-label">Desliza para ver dirección</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+  
 </ion-content>
