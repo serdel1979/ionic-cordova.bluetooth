@@ -56,7 +56,7 @@ export class HomePage implements OnInit, AfterViewInit {
     }
   }
 
-  directionLabel: string = 'Desliza para ver dirección';
+  directionLabel: string = 'Mantén presionado sobre una flecha';
 
   private isButtonTouched: boolean = false;
 
@@ -94,7 +94,7 @@ onButtonTouch(direction: string) {
 
 onButtonRelease() {
   this.isButtonTouched = false;
-  this.directionLabel = 'Desliza para ver dirección';
+  this.directionLabel = 'Mantén presionado sobre una flecha';
   if (this.updateIntervalId) {
     clearInterval(this.updateIntervalId);
   }
@@ -140,28 +140,17 @@ onButtonRelease() {
   onTouchEnd() {
     this.isTouching = false;
     this.lastTouchedButton = null;
-    this.directionLabel = 'Desliza para ver dirección';
+    this.directionLabel = 'Mantén presionado sobre una flecha';
   }
 
 
   ngOnInit() {
-    console.log('HomePage initialized');
-    this.elementInited$.subscribe(() => {
-      console.log('Button 8:', this.button8);
-      console.log('Button 4:', this.button4);
-      console.log('Button 6:', this.button6);
-      console.log('Button 2:', this.button2);
-    });
+    this.elementInited$.subscribe(() => {});
   }
 
   ngAfterViewInit() {
     this.elementInited$.next(true);
-    this.elementInited$.subscribe(() => {
-      console.log('Button 8:', this.button8);
-      console.log('Button 4:', this.button4);
-      console.log('Button 6:', this.button6);
-      console.log('Button 2:', this.button2);
-    });
+    
   }
 
 
@@ -209,8 +198,7 @@ onButtonRelease() {
       const x = touch.clientX;
       const y = touch.clientY;
   
-      console.log('Touch move detected', x, y);
-  
+ 
       if (this.button8 && this.isInsideButton(this.button8, x, y)) {
         this.directionLabel = 'up';
         this.sendData('8');
@@ -224,7 +212,7 @@ onButtonRelease() {
         this.directionLabel = 'down';
         this.sendData('2');
       } else {
-        this.directionLabel = 'Desliza para ver dirección';
+        this.directionLabel = 'Mantén presionado sobre una flecha';
       }
     }
   }
@@ -245,7 +233,7 @@ onButtonRelease() {
   }
   
   onButtonBlur() {
-    this.directionLabel = 'Desliza para ver dirección';
+    this.directionLabel = 'Mantén presionado sobre una flecha';
   }
 
 

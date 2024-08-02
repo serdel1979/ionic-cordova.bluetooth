@@ -5,7 +5,7 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
+<!--(touchmove)="onButtonTouch('8')"  -->
 
 <ion-content 
   (touchstart)="onTouchStart($event)"
@@ -17,13 +17,16 @@
     </ion-toolbar>
   </ion-header>
   <ion-grid>
+
+    <ion-row>
+      
+    </ion-row>
     <ion-row>
       <ion-col>
 
         <ion-button style="height: 150px;" 
           expand="block" 
           (touchstart)="onButtonTouch('8')" 
-          (touchmove)="onButtonTouch('8')" 
           (touchend)="onButtonRelease()"
           (touchmove)="handleMove($event, '8')" 
           #button8>
@@ -36,7 +39,6 @@
 
         <ion-button style="height: 150px;" expand="block" 
           (touchstart)="onButtonTouch('4')" 
-          (touchmove)="onButtonTouch('4')" 
           (touchend)="onButtonRelease()"
           (touchmove)="handleMove($event, '4')" 
           #button8>
@@ -47,7 +49,6 @@
 
         <ion-button  style="height: 150px;" expand="block" 
           (touchstart)="onButtonTouch('6')" 
-          (touchmove)="onButtonTouch('6')" 
           (touchend)="onButtonRelease()"
           (touchmove)="handleMove($event, '6')" 
           #button8>
@@ -59,7 +60,6 @@
       <ion-col>
         <ion-button style="height: 150px;" expand="block" 
            (touchstart)="onButtonTouch('2')" 
-          (touchmove)="onButtonTouch('2')" 
           (touchend)="onButtonRelease()"
           (touchmove)="handleMove($event, '2')" 
         #button8>
