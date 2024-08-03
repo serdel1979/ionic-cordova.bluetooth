@@ -7,10 +7,7 @@
 </ion-header>
 <!--(touchmove)="onButtonTouch('8')"  -->
 
-<ion-content 
-  (touchstart)="onTouchStart($event)"
-  (touchmove)="onTouchMove($event)"
-  (touchend)="onTouchEnd()">
+<ion-content (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd()">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Control</ion-title>
@@ -24,24 +21,22 @@
     </ion-button>
 
     <ion-grid *ngIf="!deviceConnected">
-      <ion-row>
-        <ion-col size="8" *ngFor="let dev of devices">
-          <p>{{ dev.name }}</p>
-        </ion-col>
-        <ion-col size="4" *ngFor="let dev of devices">
-          <ion-button (click)="connect(dev.address)">Conectar</ion-button>
-        </ion-col>
-      </ion-row>
+      <ion-list>
+        <ion-item *ngFor="let dev of devices">
+          <ion-col size="8">
+            <p>{{ dev.name }}</p>
+          </ion-col>
+          <ion-col size="4">
+            <ion-button (click)="connect(dev.address)">Conectar</ion-button>
+          </ion-col>
+        </ion-item>
+      </ion-list>
     </ion-grid>
     <ion-row>
       <ion-col>
 
-        <ion-button style="height: 150px;" 
-          expand="block" 
-          (touchstart)="onButtonTouch('8')" 
-          (touchend)="onButtonRelease()"
-          (touchmove)="handleMove($event, '8')" 
-          #button8>
+        <ion-button style="height: 150px;" expand="block" (touchstart)="onButtonTouch('8')"
+          (touchend)="onButtonRelease()" (touchmove)="handleMove($event, '8')" #button8>
           <ion-icon name="arrow-up"></ion-icon>
         </ion-button>
       </ion-col>
@@ -49,32 +44,23 @@
     <ion-row>
       <ion-col>
 
-        <ion-button style="height: 150px;" expand="block" 
-          (touchstart)="onButtonTouch('4')" 
-          (touchend)="onButtonRelease()"
-          (touchmove)="handleMove($event, '4')" 
-          #button8>
+        <ion-button style="height: 150px;" expand="block" (touchstart)="onButtonTouch('4')"
+          (touchend)="onButtonRelease()" (touchmove)="handleMove($event, '4')" #button8>
           <ion-icon name="arrow-back"></ion-icon>
         </ion-button>
       </ion-col>
       <ion-col>
 
-        <ion-button  style="height: 150px;" expand="block" 
-          (touchstart)="onButtonTouch('6')" 
-          (touchend)="onButtonRelease()"
-          (touchmove)="handleMove($event, '6')" 
-          #button8>
+        <ion-button style="height: 150px;" expand="block" (touchstart)="onButtonTouch('6')"
+          (touchend)="onButtonRelease()" (touchmove)="handleMove($event, '6')" #button8>
           <ion-icon name="arrow-forward"></ion-icon>
         </ion-button>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-button style="height: 150px;" expand="block" 
-           (touchstart)="onButtonTouch('2')" 
-          (touchend)="onButtonRelease()"
-          (touchmove)="handleMove($event, '2')" 
-        #button8>
+        <ion-button style="height: 150px;" expand="block" (touchstart)="onButtonTouch('2')"
+          (touchend)="onButtonRelease()" (touchmove)="handleMove($event, '2')" #button8>
           <ion-icon name="arrow-down"></ion-icon>
         </ion-button>
       </ion-col>
