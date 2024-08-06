@@ -17,6 +17,16 @@ export class HomePage implements OnInit, AfterViewInit {
   private updateIntervalId: any;
 
   public devices: any;
+
+  //esta estructura la us solo para simular en web
+  public devicesSimulateds : any = [{
+    name : 'HC-06',
+    address: 'a1:b2:c5:d4:a1:a5'
+  },{
+    name : 'P47',
+    address: 'a1:b2:c5:d4:a1:b9'
+  }];
+
   public deviceConnected: any;
   public directionLabel: string = 'Mantén presionado sobre una flecha';
 
@@ -107,7 +117,7 @@ export class HomePage implements OnInit, AfterViewInit {
   async listDevices() {
     const loading = await this.loadingCtrl.create({
       message: 'Buscando dispositivos...',
-      duration: 5000 // Opcional: duración máxima del loading spinner en milisegundos
+      duration: 9000 // Opcional: duración máxima del loading spinner en milisegundos
     });
     
     await loading.present(); // Mostrar el spinner
@@ -140,17 +150,39 @@ export class HomePage implements OnInit, AfterViewInit {
       this.presentAlert('Error', '', 'Ocurrió un error al listar dispositivos: ' + error);
     }
   }
+
+
+  async connectSimulate(address: any) {
+    const dev = {
+      data : this.devicesSimulateds.find((dev: any) => dev.address === address)
+    }
+   // const device = this.devicesSimulateds.find((dev: any) => dev.address === address);
+    this.deviceConnected = dev;
+  }
+
+
+
   
   async connect(address: any) {
     const loading = await this.loadingCtrl.create({
       message: 'Conectando...',
-      duration: 5000 // Opcional: duración máxima del loading spinner en milisegundos
+      duration: 9000
     });
     
     await loading.present(); // Mostrar el spinner
+
+    const device = this.devices.find((dev: any) => dev.address === address);
+
+    if (!device) {
+      await loading.dismiss();
+      this.presentAlert('Error', '', 'No se encontró el dispositivo en la lista.');
+      return;
+    }
+
     this.bluetoothSerial.connect(address)
       .subscribe(
         succ => {
+          this.deviceConnected = device;
           this.connDev();
           loading.dismiss(); 
         },
@@ -168,7 +200,8 @@ export class HomePage implements OnInit, AfterViewInit {
   }
 
   hundler(succ: any) {
-    this.deviceConnected = succ;
+    this.deviceConnected.data = succ; 
+   // this.deviceConnected = succ;
   }
 
   sendData(dataToSend: string) {
@@ -196,6 +229,17 @@ export class HomePage implements OnInit, AfterViewInit {
     this.isButtonTouched = true;
     this.updateDirection(direction);
     this.updateIntervalId = setInterval(() => this.updateDirection(direction), 100);
+  }
+
+
+  disconnect(){
+    this.bluetoothSerial.disconnect().then(()=>{
+      this.deviceConnected = null;
+    })
+  }
+
+  disconnectSimulate(){
+      this.deviceConnected = null;
   }
 
   onButtonRelease() {
