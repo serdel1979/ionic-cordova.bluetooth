@@ -4,6 +4,13 @@ import { AlertController, LoadingController, Platform } from '@ionic/angular';
 import { Subject } from 'rxjs';
 import { BleClient, BleDevice, numbersToDataView } from '@capacitor-community/bluetooth-le';
 
+/*
+npm run build
+npx cap sync
+npx cap open android
+
+*/
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -28,7 +35,7 @@ export class HomePage implements OnInit, AfterViewInit {
   }];
 
   public deviceConnected: any;
-  public directionLabel: string = 'Mantén presionado sobre una flecha';
+  public directionLabel: string = 'Presiona una dirección';
 
   @ViewChild('button8') button8: ElementRef | undefined;
   @ViewChild('button4') button4: ElementRef | undefined;
@@ -244,7 +251,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
   onButtonRelease() {
     this.isButtonTouched = false;
-    this.directionLabel = 'Mantén presionado sobre una flecha';
+    this.directionLabel = 'Presiona una dirección';
     if (this.updateIntervalId) {
       clearInterval(this.updateIntervalId);
     }
@@ -286,7 +293,32 @@ export class HomePage implements OnInit, AfterViewInit {
   onTouchEnd() {
     this.isTouching = false;
     this.lastTouchedButton = null;
-    this.directionLabel = 'Mantén presionado sobre una flecha';
+    this.directionLabel = 'Presiona una dirección';
+  }
+
+  changeDirection(value: any){
+    switch (value) {
+      case '8':
+        this.directionLabel = 'up';
+        break;
+      case '4':
+        this.directionLabel = 'left';
+        break;
+      case '6':
+        this.directionLabel = 'right';
+        break;
+      case '2':
+        this.directionLabel = 'down';
+        break;
+      default:
+        this.directionLabel = 'Presiona una dirección';
+        break;
+    }
+  }
+
+  runInDirection(value: any){
+    this.changeDirection(value);
+    this.sendData(value);
   }
 
   private updateTouchedButton(event: TouchEvent) {
@@ -336,7 +368,7 @@ export class HomePage implements OnInit, AfterViewInit {
         this.directionLabel = 'down';
         this.sendData('2');
       } else {
-        this.directionLabel = 'Mantén presionado sobre una flecha';
+        this.directionLabel = 'Presiona una dirección';
       }
     }
   }
@@ -347,7 +379,7 @@ export class HomePage implements OnInit, AfterViewInit {
       case '4': return 'left';
       case '6': return 'right';
       case '2': return 'down';
-      default: return 'Desliza para ver dirección';
+      default: return 'Presiona una dirección';
     }
   }
 
@@ -357,7 +389,7 @@ export class HomePage implements OnInit, AfterViewInit {
   }
 
   onButtonBlur() {
-    this.directionLabel = 'Mantén presionado sobre una flecha';
+    this.directionLabel = 'Presiona una dirección';
   }
 
   private isInsideButton(button: ElementRef, x: number, y: number): boolean {
