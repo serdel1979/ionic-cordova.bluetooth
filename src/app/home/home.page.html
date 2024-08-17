@@ -15,9 +15,14 @@
   </ion-header>
   <ion-grid>
 
-    <ion-button (click)="listDevices()">
+    <ion-button *ngIf="!deviceConnected" (click)="listDevices()">
       <ion-icon aria-hidden="true" name="bluetooth" slot="start"></ion-icon>
       Buscar
+    </ion-button>
+
+    <ion-button *ngIf="deviceConnected" (click)="disconnect()">
+      <ion-icon aria-hidden="true" name="bluetooth" slot="start"></ion-icon>
+      Desconectar
     </ion-button>
 
     <ion-grid *ngIf="!deviceConnected">
@@ -37,7 +42,7 @@
     <ion-row *ngIf="deviceConnected">
       <ion-col>
 
-        <ion-button style="height: 150px;" expand="block"
+        <ion-button style="height: 130px;" expand="block"
           (click)="runInDirection('8')" #button8>
           <ion-icon name="arrow-up"></ion-icon>
         </ion-button>
@@ -46,26 +51,26 @@
     <ion-row *ngIf="deviceConnected">
       <ion-col>
 
-        <ion-button style="height: 150px;" expand="block" (click)="runInDirection('4')" #button8>
+        <ion-button style="height: 130px;" expand="block" (click)="runInDirection('4')" #button8>
           <ion-icon name="arrow-back"></ion-icon>
         </ion-button>
       </ion-col>
       <ion-col>
 
-        <ion-button style="height: 150px;" expand="block" (click)="runInDirection('6')" #button8>
+        <ion-button style="height: 130px;" expand="block" (click)="runInDirection('6')" #button8>
           <ion-icon name="arrow-forward"></ion-icon>
         </ion-button>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="deviceConnected">
       <ion-col>
-        <ion-button style="height: 150px;" expand="block" (click)="runInDirection('2')" #button8>
+        <ion-button style="height: 130px;" expand="block" (click)="runInDirection('2')" #button8>
           <ion-icon name="arrow-down"></ion-icon>
         </ion-button>
       </ion-col>
     </ion-row>
 
-    <ion-row  *ngIf="!deviceConnected">
+    <ion-row style="padding: 30px;"  *ngIf="!deviceConnected">
       <ion-label style="margin: 10px; padding: 10px;"><ion-icon name="close-outline"></ion-icon>No está conectado!!!</ion-label>
     </ion-row>
 
@@ -74,23 +79,23 @@
       <ion-list>
         <ion-item>
           <ion-col size="6">
-            <ion-icon *ngIf="directionLabel == 'up'" name="arrow-up"></ion-icon>
-            <ion-icon *ngIf="directionLabel == 'left'" name="arrow-back"></ion-icon>
-            <ion-icon *ngIf="directionLabel == 'right'" name="arrow-forward"></ion-icon>
-            <ion-icon *ngIf="directionLabel == 'down'" name="arrow-down"></ion-icon>
+            <ion-icon style="margin-left: 20px;" *ngIf="directionLabel == 'up'" name="arrow-up"></ion-icon>
+            <ion-icon style="margin-left: 20px;" *ngIf="directionLabel == 'left'" name="arrow-back"></ion-icon>
+            <ion-icon style="margin-left: 20px;" *ngIf="directionLabel == 'right'" name="arrow-forward"></ion-icon>
+            <ion-icon style="margin-left: 20px;" *ngIf="directionLabel == 'down'" name="arrow-down"></ion-icon>
             <ion-label *ngIf="directionLabel == 'Presiona una dirección'">Indicar dirección...</ion-label>
           </ion-col>
           <ion-col size="6">
-            <ion-button expand="block" (click)="runInDirection('0')">Parar</ion-button>
+            <ion-button style="height: 100px;" expand="block" (click)="runInDirection('0')">Parar</ion-button>
           </ion-col>
         </ion-item>
         <ion-item>
           <ion-col size="6">
-            <p>{{ deviceConnected.data.name }}</p>
+            <p>{{ deviceConnected.name }}</p>
           </ion-col>
           <ion-col size="6">
-            <ion-button expand="block" (click)="disconnect()">Desconectar</ion-button>
-            <!-- <ion-button (click)="disconnect()">Desconectar</ion-button> -->
+          <!--  <ion-button expand="block" (click)="disconnect()">Desconectar</ion-button>
+             <ion-button (click)="disconnect()">Desconectar</ion-button> -->
           </ion-col>
         </ion-item>
       </ion-list>

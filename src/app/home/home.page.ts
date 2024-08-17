@@ -26,6 +26,7 @@ export class HomePage implements OnInit, AfterViewInit {
   public devices: any;
 
   //esta estructura la us solo para simular en web
+  /*
   public devicesSimulateds : any = [{
     name : 'HC-06',
     address: 'a1:b2:c5:d4:a1:a5'
@@ -33,6 +34,7 @@ export class HomePage implements OnInit, AfterViewInit {
     name : 'P47',
     address: 'a1:b2:c5:d4:a1:b9'
   }];
+  */
 
   public deviceConnected: any;
   public directionLabel: string = 'Presiona una dirección';
@@ -139,18 +141,7 @@ export class HomePage implements OnInit, AfterViewInit {
         await loading.dismiss(); // Ocultar el spinner en caso de error
         this.presentAlert('Error', '', 'Ocurrió un error al listar dispositivos: ' + error);
       });
-  
-      // Opción de uso de BleClient para el escaneo (descomentar si se necesita)
-      /*
-      await BleClient.requestLEScan({ services: [] }, (result) => {
-        this.devices = result;
-      });
-  
-      setTimeout(async () => {
-        await BleClient.stopLEScan();
-        await loading.dismiss(); // Ocultar el spinner al finalizar el escaneo
-      }, 5000);
-      */
+
   
     } catch (error) {
       await loading.dismiss(); // Ocultar el spinner en caso de error
@@ -158,7 +149,7 @@ export class HomePage implements OnInit, AfterViewInit {
     }
   }
 
-
+/*
   async connectSimulate(address: any) {
     const dev = {
       data : this.devicesSimulateds.find((dev: any) => dev.address === address)
@@ -167,7 +158,7 @@ export class HomePage implements OnInit, AfterViewInit {
     this.deviceConnected = dev;
   }
 
-
+*/
 
   
   async connect(address: any) {
@@ -232,19 +223,23 @@ export class HomePage implements OnInit, AfterViewInit {
     await alert.present();
   }
 
+  /*
   onButtonTouch(direction: string) {
     this.isButtonTouched = true;
     this.updateDirection(direction);
     this.updateIntervalId = setInterval(() => this.updateDirection(direction), 100);
   }
-
+*/
 
   disconnect(){
+    this.sendData("0");
+    this.onButtonBlur();
     this.bluetoothSerial.disconnect().then(()=>{
       this.deviceConnected = null;
     })
   }
 
+  /*
   disconnectSimulate(){
       this.deviceConnected = null;
   }
@@ -295,7 +290,7 @@ export class HomePage implements OnInit, AfterViewInit {
     this.lastTouchedButton = null;
     this.directionLabel = 'Presiona una dirección';
   }
-
+*/
   changeDirection(value: any){
     switch (value) {
       case '8':
@@ -320,7 +315,7 @@ export class HomePage implements OnInit, AfterViewInit {
     this.changeDirection(value);
     this.sendData(value);
   }
-
+/*
   private updateTouchedButton(event: TouchEvent) {
     const touch = event.touches[0];
     const x = touch.clientX;
@@ -372,7 +367,7 @@ export class HomePage implements OnInit, AfterViewInit {
       }
     }
   }
-
+*/
   private getDirectionLabel(buttonNumber: string): string {
     switch (buttonNumber) {
       case '8': return 'up';
@@ -392,6 +387,7 @@ export class HomePage implements OnInit, AfterViewInit {
     this.directionLabel = 'Presiona una dirección';
   }
 
+  /*
   private isInsideButton(button: ElementRef, x: number, y: number): boolean {
     if (!button.nativeElement) {
       return false;
@@ -399,6 +395,7 @@ export class HomePage implements OnInit, AfterViewInit {
     const rect = button.nativeElement.getBoundingClientRect();
     return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
   }
+    */
 }
 
 
